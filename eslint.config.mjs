@@ -1,17 +1,12 @@
 import { defineConfig } from 'eslint/config';
+import js from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
+import jsonParser from 'jsonc-eslint-parser';
 
 export default defineConfig([
+  js.configs.recommended,
   {
     files: ['**/*.js'],
-    languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-      globals: {
-        browser: true,
-        node: true
-      }
-    },
     plugins: {
       import: importPlugin,
     },
@@ -19,19 +14,24 @@ export default defineConfig([
       'no-console': 'warn',
       'indent': ['error', 2],
       'quotes': ['error', 'single'],
-      // Ajoutez d'autres règles Airbnb si nécessaire
+      'semi': ['error', 'always'],
+      'import/no-unresolved': 'error',
+      'import/extensions': ['error', 'ignorePackages'],
+      'import/order': 'error'
     },
-    extends: ['airbnb-base']
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        browser: true,
+        node: true
+      }
+    }
   },
-  
-  // Configuration pour les fichiers JSON (plus simple)
   {
     files: ['**/*.json'],
     languageOptions: {
-      parser: jsonParser // Nous allons définir ceci ci-dessous
+      parser: jsonParser
     }
   }
 ]);
-
-// Pour le support JSON, vous pouvez utiliser ceci :
-import jsonParser from 'jsonc-eslint-parser';
