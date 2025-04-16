@@ -1,6 +1,6 @@
-function add(a,b){
-    console.log('Adding numbers')
-    return a+b
+// utils.js - Version corrigée
+function add(a, b) {
+    return a + b;
   }
   
-  const result=add(1, 1)
+  const result = add(1, 1);
